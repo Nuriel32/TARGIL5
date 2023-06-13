@@ -1,0 +1,14 @@
+# Use a base image with Java installed
+FROM openjdk:8-jdk-alpine
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the server jar file into the container
+COPY server.jar .
+
+# Expose the port on which the server listens
+EXPOSE 9285
+
+# Set the command to run the server when the container starts
+CMD ["java", "-jar", "server.jar"]
