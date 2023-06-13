@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="REQUEST_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/requestLogs.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/requestLogs.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %-5level: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="TODO_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/todosLogs.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/todosLogs.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %-5level: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="request-logger" level="INFO" additivity="false">
+        <appender-ref ref="REQUEST_LOG_FILE" />
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <logger name="todo-logger" level="INFO" additivity="false">
+        <appender-ref ref="TODO_LOG_FILE" />
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>
